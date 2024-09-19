@@ -1,0 +1,72 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Department {
+  id: Float!
+  code: String!
+  name: String!
+  cities: [City!]!
+}
+
+type City {
+  id: Int!
+  code: String!
+  name: String!
+  department: Department!
+}
+
+type Headquarter {
+  id: Int!
+  name: String!
+  zip: String!
+  city: City!
+}
+
+type Query {
+  headquarter(id: Int!): Headquarter!
+  department(id: Int!): Department!
+  cities: [City!]!
+  city(id: Int!): City!
+}
+
+type Mutation {
+  createHeadquarter(createHeadquarterInput: CreateHeadquarterInput!): Headquarter!
+  updateHeadquarter(updateHeadquarterInput: UpdateHeadquarterInput!): Headquarter!
+  removeHeadquarter(id: Int!): Headquarter!
+  createDepartment(createDepartmentInput: CreateDepartmentInput!): Department!
+  updateDepartment(updateDepartmentInput: UpdateDepartmentInput!): Department!
+  removeDepartment(id: Int!): Department!
+}
+
+input CreateHeadquarterInput {
+  name: String!
+  zip: String!
+  city: CreateCityInput!
+}
+
+input CreateCityInput {
+  id: Int!
+  code: String!
+  name: String!
+  department: CreateDepartmentInput!
+}
+
+input CreateDepartmentInput {
+  id: Float!
+  code: String!
+  name: String!
+}
+
+input UpdateHeadquarterInput {
+  name: String
+  zip: String
+  city: CreateCityInput
+  id: Int!
+}
+
+input UpdateDepartmentInput {
+  id: Int!
+  code: String
+  name: String
+}
