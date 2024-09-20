@@ -1,18 +1,22 @@
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
-import { Module } from '@nestjs/common';
-import { CityModule } from './city/city.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { DepartmentModule } from './department/department.module';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ConfigModule } from '@nestjs/config';
+
+import { CityModule } from './city/city.module';
+import { DepartmentModule } from './department/department.module';
 import { HeadquarterModule } from './headquarter/headquarter.module';
+import { RoleModule } from './role/role.module';
+import { UserModule } from './user/user.module';
+import { PermissionModule } from './permission/permission.module';
 
 @Module({
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      include: [CityModule, DepartmentModule, HeadquarterModule],
+      include: [CityModule, DepartmentModule, HeadquarterModule, RoleModule, UserModule, PermissionModule],
       autoSchemaFile: 'schema.gql',
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
@@ -31,6 +35,9 @@ import { HeadquarterModule } from './headquarter/headquarter.module';
     CityModule,
     DepartmentModule,
     HeadquarterModule,
+    UserModule,
+    RoleModule,
+    PermissionModule,
   ],
 })
 export class AppModule {}

@@ -1,10 +1,11 @@
 import { Entity, Column, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { ObjectType, Field } from '@nestjs/graphql';
 import { City } from 'src/city/entities/city.entity';
+import { AbstractEntity } from 'src/abstract.entity';
 
 @Entity({ name: 'department' })
 @ObjectType()
-export class Department {
+export class Department extends AbstractEntity {
   @PrimaryGeneratedColumn()
   @Field(() => Number)
   id: number;

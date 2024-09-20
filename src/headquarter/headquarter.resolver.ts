@@ -13,7 +13,7 @@ export class HeadquarterResolver {
     return this.headquarterService.create(createHeadquarterInput);
   }
 
-  @Query(() => [Headquarter], { name: 'headquarter' })
+  @Query(() => [Headquarter], { name: 'headquarters' })
   findAll() {
     return this.headquarterService.findAll();
   }

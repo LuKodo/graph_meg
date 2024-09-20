@@ -16,6 +16,34 @@ type City {
   department: Department!
 }
 
+type Permission {
+  id: Int!
+  create: Boolean!
+  read: Boolean!
+  update: Boolean!
+  delete: Boolean!
+  role: Role!
+}
+
+type Role {
+  id: Int!
+  name: String!
+  user: User!
+  permission: Permission!
+}
+
+type User {
+  id: Int!
+  username: String!
+  password: String!
+  name: String!
+  model: String!
+  status: String!
+  mail: String!
+  headquarter: Headquarter!
+  role: Role!
+}
+
 type Headquarter {
   id: Int!
   name: String!
@@ -24,19 +52,59 @@ type Headquarter {
 }
 
 type Query {
+  roles: [Role!]!
+  role(id: Int!): Role!
+  users: [User!]!
+  hash(password: String!): String!
+  userByUsername(username: String!): User!
+  userById(id: Float!): User!
+  validateLogin(user: LoginInput!): User!
+  headquarters: [Headquarter!]!
   headquarter(id: Int!): Headquarter!
   department(id: Int!): Department!
   cities: [City!]!
   city(id: Int!): City!
 }
 
+input LoginInput {
+  username: String!
+  password: String!
+}
+
 type Mutation {
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
   createHeadquarter(createHeadquarterInput: CreateHeadquarterInput!): Headquarter!
   updateHeadquarter(updateHeadquarterInput: UpdateHeadquarterInput!): Headquarter!
   removeHeadquarter(id: Int!): Headquarter!
   createDepartment(createDepartmentInput: CreateDepartmentInput!): Department!
   updateDepartment(updateDepartmentInput: UpdateDepartmentInput!): Department!
   removeDepartment(id: Int!): Department!
+}
+
+input CreateUserInput {
+  username: String!
+  password: String!
+  name: String!
+  model: String!
+  status: String!
+  mail: String!
+  headquarter: HeadquarterInput!
+}
+
+input HeadquarterInput {
+  id: Int!
+}
+
+input UpdateUserInput {
+  id: Int!
+  username: String
+  password: String
+  name: String
+  model: String
+  status: String
+  mail: String
+  headquarter: CreateHeadquarterInput
 }
 
 input CreateHeadquarterInput {
